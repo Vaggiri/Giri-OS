@@ -1,29 +1,35 @@
 # Security Policy
 
+We are committed to making **GisunOS** a secure and private workstation for the web.
+
 ## Supported Versions
 
-Specifically focus on the latest stable versions of GisunOS:
+Currently, we only provide security patches for the main production branch.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+| v1.1.x  | :white_check_mark: |
+| v1.0.x  | :white_check_mark: |
+| < v1.0  | :x:                |
 
 ## Reporting a Vulnerability
 
-We take security seriously at the GisunOS project. If you believe you've found a security vulnerability in our codebase, please do not open a public issue. Instead, follow these steps:
+**Please do not open public issues for security vulnerabilities.**
+
+If you discover a potential security flaw in GisunOS (especially in the **GisunBridge** proxy or **Supabase** RLS policies), please report it responsibly:
 
 1.  **Draft a detailed report**: Include reproduction steps, potential impact, and suggested fixes.
-2.  **Contact us privately**: Send an email to [security-reports@gisunos.dev] (or open a private security advisory on GitHub if available).
-3.  **Wait for a response**: We aim to respond within 48 hours to confirm receipt and discuss next steps.
+2.  **Contact us privately**: Open a [GitHub Private Security Advisory](https://github.com/Vaggiri/Giri-OS/security/advisories/new) (preferred) or send a direct message to the maintainers.
+3.  **Hacking Policy**: We allow research on your own local environment. Please do not attempt to hack the live production demo or other users' data.
 
-We follow a coordinated disclosure policy. We will work with you to fix the vulnerability and will credit you for your discovery in the next release.
+## Built-in Protections
 
-## System Protection Overview
+GisunOS is built with security-first architecture:
 
-GisunOS includes several built-in security features:
-*   **Virtual Firewall**: Intercepts and validates all outgoing requests from applications.
-*   **Isolated Storage**: Uses Supabase with Row Level Security (RLS) to ensure data privacy.
-*   **Permission System**: Applications must request permissions for sensitive operations (notifications, audio, etc.).
+- **GisunBridge Isolation**: Our absolute proxy bridge is designed to scrub malicious tags and prevent cross-origin script injection.
+- **Vering Logic**: All outgoing API requests are intercepted by a custom firewall.
+- **Stateless API**: Our serverless backend (Vercel API) minimizes the attack surface.
+- **Row Level Security**: We use Supabase RLS to ensure that users can only access their own files and media.
 
-For more details on our security architecture, check [docs/security.md](docs/security.md).
+---
+*Thank you for helping us keep the GisunOS community safe.*

@@ -1,44 +1,61 @@
 # Contributing to GisunOS
 
-First off, thank you for considering contributing to GisunOS! It's people like you that make GisunOS such a great tool.
+First off, thank you for considering contributing to **GisunOS**! It's people like you that make this workstation-grade WebOS a reality.
 
-## Our Philosophy
-
-GisunOS is an open-source project with a strong emphasis on maintaining high-quality code and preserving original authorship. We follow a strict PR-based workflow.
-
-## Rules of Contribution
-
-1.  **Never remove author credit**: Any modification or redistribution must keep all original copyright notices and author attributions intact.
-2.  **No proprietary code**: All contributions must be compatible with the GPL-3.0 license.
-3.  **GPG Signing**: Every commit in a Pull Request **must** be GPG-signed and "Verified" on GitHub. Commits without verification will not be merged.
-4.  **Strict Review**: All PRs must be reviewed and approved by the project maintainers (Vaggiri).
-4.  **Follow Coding Standards**: Ensure your code follows the established style (Vanilla JS, CSS-based glassmorphism, etc.).
-
-## How Can I Contribute?
-
-### Reporting Bugs
-*   Check the Issues tab to see if the bug has already been reported.
-*   If not, open a new issue. Clearly describe the problem and steps to reproduce.
-
-### Suggesting Enhancements
-*   Open an issue to discuss the enhancement before starting any work.
-*   Clearly explain the value of the enhancement to the project.
-
-### Pull Requests
-1.  Fork the repository.
-2.  Create a new branch (`feat/your-feature` or `fix/your-fix`).
-3.  Implement your changes.
-4.  Write or update documentation if necessary.
-5.  Submit a Pull Request against the `main` branch.
-
-## Coding Standards
-*   **Vanilla First**: Prefer vanilla JavaScript and CSS over external libraries.
-*   **Modularity**: Keep components isolated and reusable.
-*   **Documentation**: Every new feature must be documented in the `docs/` folder.
-*   **License Headers**: Ensure every new file includes the copyright and license header.
-
-## Sign Your Work
-By contributing to this project, you certify that you have the right to submit your work and that it is licensed under the GPL-3.0. You grant **Vaggiri** the right to distribute your contribution under the project's license.
+> [!IMPORTANT]
+> **Authorship Protection**: GisunOS is designed and built by **Vaggiri**. We maintain strict standards to ensure original attribution and authorship are preserved across all forks and derivatives.
 
 ---
-Thank you for making GisunOS better!
+
+## 🛠️ Global Development Setup
+
+The workflow has been simplified into a unified monorepo:
+
+1.  **Fork & Clone**:
+    ```bash
+    git clone https://github.com/Vaggiri/Giri-OS.git
+    cd Giri-OS
+    ```
+2.  **Unified Install**:
+    ```bash
+    # Install root, api, and client dependencies in one go
+    npm install
+    cd client && npm install
+    ```
+3.  **Run Development Environment**:
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 🚦 Contribution Workflow
+
+Our process is designed to maintain high-quality results:
+
+1.  **Check for Issues**: Always check if your bug or feature idea is already being discussed.
+2.  **Use Templates**: We provide professional **Issue Templates** for [Bug Reports](https://github.com/Vaggiri/Giri-OS/issues/new?template=bug-report.md) and [Feature Requests](https://github.com/Vaggiri/Giri-OS/issues/new?template=feature-request.md). Please use them!
+3.  **Signed Commits**: We strictly require **GPG-signed commits**. Commits without the "Verified" badge on GitHub will not be merged.
+4.  **License Compliance**: All work must be compatible with the **GPL-3.0** license.
+
+---
+
+## 🎨 Creative Standards (The "Flex" Guide)
+
+To maintain the premium GisunOS aesthetic, your UI contributions should follow these rules:
+
+- **Glassmorphism Preferred**: Use `backdrop-blur-3xl`, `bg-white/5`, and subtle borders.
+- **Spring Animations**: Use Framer Motion `stiffness: 450, damping: 35` for all window/dock interactions.
+- **Tailwind Atomic Design**: Avoid arbitrary values; use our CSS variables defined in `index.css`.
+- **Iconography**: Use [Lucide React](https://lucide.dev/) for all system icons.
+
+---
+
+## ✅ Pull Request Requirements
+When you open a PR, our **Pull Request Template** will automatically guide you. Ensure you include:
+- A clear description of the problem solved.
+- **Screenshots** or **Screen Recordings** (essential for UI changes!).
+- Verification that you've tested on both **Desktop** and **Mobile Landscape**.
+
+---
+*Thank you for helping us build the ultimate Web Workstation!*
