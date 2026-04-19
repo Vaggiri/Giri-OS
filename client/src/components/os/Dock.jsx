@@ -37,7 +37,8 @@ const Dock = ({ toggleLaunchpad }) => {
       )}
 
       <motion.div 
-        className="fixed bottom-4 left-1/2 z-[1000] -translate-x-1/2"
+        style={{ bottom: 'var(--dock-bottom)' }}
+        className="fixed left-1/2 z-[1000] -translate-x-1/2"
         onMouseEnter={() => setIsMouseNear(true)}
         onMouseLeave={() => setIsMouseNear(false)}
         initial={false}
@@ -48,18 +49,20 @@ const Dock = ({ toggleLaunchpad }) => {
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       >
         <div 
-          className={`flex flex-row h-18 items-center gap-3 rounded-[24px] px-5 transition-all duration-300 
+          style={{ height: 'var(--dock-h)' }}
+          className={`flex flex-row items-center gap-2 md:gap-3 rounded-[24px] px-3 md:px-5 transition-all duration-300 
             ${dockAutoHide ? 'bg-black/30 backdrop-blur-3xl border-white/10 shadow-2xl' : 'bg-transparent border-transparent'} 
             border hover:bg-white/5 group/dock`}
         >
           {/* Launchpad Icon */}
           <motion.div
             onClick={toggleLaunchpad}
+            style={{ width: 'var(--dock-item-size)', height: 'var(--dock-item-size)' }}
             whileHover={{ scale: 1.25, y: -12 }}
             transition={{ type: "spring", stiffness: 600, damping: 25 }}
-            className="group relative flex h-[56px] w-[56px] cursor-pointer items-center justify-center rounded-xl bg-white/3 text-white transition-all border border-white/5 shadow-lg"
+            className="group relative flex cursor-pointer items-center justify-center rounded-xl bg-white/3 text-white transition-all border border-white/5 shadow-lg"
           >
-            <LayoutGrid size={24} className="text-pink-400" />
+            <LayoutGrid className="text-pink-400 size-5 md:size-6" />
             <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform px-2 py-1 bg-black/80 backdrop-blur-md rounded text-[10px] whitespace-nowrap z-[1001]">
               Launchpad
             </div>
@@ -74,15 +77,16 @@ const Dock = ({ toggleLaunchpad }) => {
               <motion.div
                 key={app.id}
                 onClick={() => openWindow(app)}
+                style={{ width: 'var(--dock-item-size)', height: 'var(--dock-item-size)' }}
                 initial={{ y: 0 }}
                 whileHover={{ 
                   scale: 1.25,
                   y: -12,
                 }}
                 transition={{ type: "spring", stiffness: 600, damping: 25 }}
-                className="group relative flex h-[56px] w-[56px] cursor-pointer items-center justify-center rounded-xl bg-white/3 text-white transition-all border border-white/5 focus:outline-none shadow-lg"
+                className="group relative flex cursor-pointer items-center justify-center rounded-xl bg-white/3 text-white transition-all border border-white/5 focus:outline-none shadow-lg"
               >
-                <div className="transform transition-transform">
+                <div className="transform transition-transform scale-75 md:scale-100 flex items-center justify-center">
                   {app.icon}
                 </div>
                 

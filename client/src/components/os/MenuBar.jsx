@@ -44,14 +44,17 @@ const MenuBar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[1000] flex h-11 items-center justify-between px-6 text-sm font-semibold text-white transition-all duration-500 shadow-lg bg-black/5 backdrop-blur-md border-b border-white/5">
+      <div 
+        style={{ height: 'var(--menubar-h)' }}
+        className="fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-6 text-[10px] md:text-sm font-semibold text-white transition-all duration-500 shadow-lg bg-black/5 backdrop-blur-md border-b border-white/5"
+      >
         {/* Left Side */}
         <div className="flex items-center gap-4 relative">
           <div ref={appleMenuRef}>
             <img 
               src="/logo.png" 
               alt="Gisun" 
-              className={`w-6 h-6 cursor-pointer object-contain transition-all duration-300 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] ${showAppleMenu ? 'brightness-125 scale-110' : 'hover:scale-110 hover:brightness-110'}`} 
+              className={`w-4 h-4 md:w-6 md:h-6 cursor-pointer object-contain transition-all duration-300 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] ${showAppleMenu ? 'brightness-125 scale-110' : 'hover:scale-110 hover:brightness-110'}`} 
               onClick={() => setShowAppleMenu(!showAppleMenu)}
             />
             {showAppleMenu && (
@@ -91,13 +94,13 @@ const MenuBar = () => {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-6">
-          <Wifi size={18} className="cursor-pointer hover:opacity-70 transition-opacity" />
-          <Battery size={18} className="cursor-pointer hover:opacity-70 transition-opacity" />
-          <Search size={18} className="cursor-pointer hover:opacity-70 transition-opacity" />
+        <div className="flex items-center gap-4 md:gap-6 scale-90 md:scale-100">
+          <Wifi size={14} className="md:size-[18px] cursor-pointer hover:opacity-70 transition-opacity" />
+          <Battery size={14} className="md:size-[18px] cursor-pointer hover:opacity-70 transition-opacity" />
+          <Search size={14} className="md:size-[18px] cursor-pointer hover:opacity-70 transition-opacity" />
           <List 
-            size={18} 
-            className={`cursor-pointer transition-all ${showControlCenter ? 'text-blue-400 scale-110' : 'hover:opacity-70'}`}
+            size={14} 
+            className={`md:size-[18px] cursor-pointer transition-all ${showControlCenter ? 'text-blue-400 scale-110' : 'hover:opacity-70'}`}
             onClick={(e) => {
               e.stopPropagation();
               setShowControlCenter(!showControlCenter);

@@ -12,6 +12,27 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Global UI Scaling Variables */
+  --menubar-h: 44px;
+  --dock-h: 72px;
+  --dock-item-size: 56px;
+  --dock-bottom: 1rem;
+  --desktop-padding: 2.5rem;
+  --shortcut-size: 80px;
+  --window-header-h: 48px;
+}
+
+@media (max-height: 500px) {
+  :root {
+    --menubar-h: 32px;
+    --dock-h: 56px;
+    --dock-item-size: 42px;
+    --dock-bottom: 0.5rem;
+    --desktop-padding: 1rem;
+    --shortcut-size: 64px;
+    --window-header-h: 36px;
+  }
 }
 
 body {

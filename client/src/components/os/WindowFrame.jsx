@@ -106,7 +106,7 @@ const WindowFrame = ({ id }) => {
         y: 0,
         width: isMax ? '100vw' : window.w,
         height: isMax ? maximizedHeight : window.h,
-        top: isMax ? 44 : window.y,
+        top: isMax ? 'var(--menubar-h)' : window.y,
         left: isMax ? 0 : window.x,
         borderRadius: isMax ? 0 : 12,
       }}
@@ -142,36 +142,37 @@ const WindowFrame = ({ id }) => {
         onPanStart={onInteractionStart}
         onPan={handleMove}
         onPanEnd={onInteractionEnd}
-        className="flex h-12 items-center justify-between px-6 select-none bg-black/5 border-b border-black/5 cursor-default active:cursor-grabbing"
+        style={{ height: 'var(--window-header-h)' }}
+        className="flex items-center justify-between px-4 md:px-6 select-none bg-black/5 border-b border-black/5 cursor-default active:cursor-grabbing"
         onDoubleClick={() => toggleMaximize(id)}
       >
-        <div className="w-24" /> 
-        <div className="text-[14px] font-semibold opacity-80 truncate px-4 text-white drop-shadow-sm tracking-wide">{window.title}</div>
+        <div className="w-20 md:w-24" /> 
+        <div className="text-[11px] md:text-[14px] font-semibold opacity-80 truncate px-4 text-white drop-shadow-sm tracking-wide">{window.title}</div>
         
-        <div className="flex gap-3 pointer-events-auto">
+        <div className="flex gap-2 md:gap-3 pointer-events-auto">
           <button 
             tabIndex="-1"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); toggleMinimize(id); }}
-            className="flex h-4 w-4 items-center justify-center rounded-full bg-[#FFBD2E] hover:bg-[#FFBD2E]/80 shadow-inner group"
+            className="flex h-3 w-3 md:h-4 md:w-4 items-center justify-center rounded-full bg-[#FFBD2E] hover:bg-[#FFBD2E]/80 shadow-inner group"
           >
-            <Minus size={10} className="invisible group-hover:visible text-black/60 stroke-[3]" />
+            <Minus size={8} className="invisible group-hover:visible text-black/60 stroke-[3] md:size-[10px]" />
           </button>
           <button 
             tabIndex="-1"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); toggleMaximize(id); }}
-            className="flex h-4 w-4 items-center justify-center rounded-full bg-[#27C93F] hover:bg-[#27C93F]/80 shadow-inner group"
+            className="flex h-3 w-3 md:h-4 md:w-4 items-center justify-center rounded-full bg-[#27C93F] hover:bg-[#27C93F]/80 shadow-inner group"
           >
-            <Maximize2 size={10} className="invisible group-hover:visible text-black/60 stroke-[3]" />
+            <Maximize2 size={8} className="invisible group-hover:visible text-black/60 stroke-[3] md:size-[10px]" />
           </button>
           <button 
             tabIndex="-1"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); closeWindow(id); }}
-            className="flex h-4 w-4 items-center justify-center rounded-full bg-[#FF5F56] hover:bg-[#FF5F56]/80 shadow-inner group"
+            className="flex h-3 w-3 md:h-4 md:w-4 items-center justify-center rounded-full bg-[#FF5F56] hover:bg-[#FF5F56]/80 shadow-inner group"
           >
-            <X size={10} className="invisible group-hover:visible text-black/60 stroke-[3]" />
+            <X size={8} className="invisible group-hover:visible text-black/60 stroke-[3] md:size-[10px]" />
           </button>
         </div>
       </motion.div>

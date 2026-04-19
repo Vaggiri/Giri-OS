@@ -67,7 +67,10 @@ const Desktop = () => {
       
       <MenuBar />
       
-      <main className="relative flex-1 w-full h-full p-10 pt-14 no-scrollbar">
+      <main 
+        style={{ padding: 'var(--desktop-padding)', paddingTop: 'calc(var(--menubar-h) + 1.5rem)' }}
+        className="relative flex-1 w-full h-full no-scrollbar overflow-hidden"
+      >
         {/* Dynamic App Shortcuts (Freely Movable) */}
         {shortcuts.map(shortcut => {
            const app = apps.find(a => a.id === shortcut.appId);
@@ -91,12 +94,14 @@ const Desktop = () => {
                animate={{ x: shortcut.x, y: shortcut.y }}
                onDoubleClick={() => openWindow(app)}
                className="absolute z-10 group flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 cursor-grab active:cursor-grabbing transition-colors"
-               style={{ width: 80 }}
+               style={{ width: 'var(--shortcut-size)' }}
              >
-                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-lg group-hover:scale-110 transition-transform">
-                  {React.cloneElement(app.icon, { size: 32 })}
+                <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="scale-75 md:scale-100 flex items-center justify-center">
+                    {app.icon}
+                  </div>
                 </div>
-                <span className="text-[10px] text-white text-center font-bold shadow-black drop-shadow-md tracking-tight truncate w-full">
+                <span className="text-[9px] md:text-[10px] text-white text-center font-bold shadow-black drop-shadow-md tracking-tight truncate w-full">
                   {app.name}
                 </span>
              </motion.div>
@@ -104,14 +109,17 @@ const Desktop = () => {
         })}
 
         {/* Static Grid for System Files/Folders */}
-        <div className="absolute top-14 left-10 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 pointer-events-none">
+        <div 
+          style={{ top: 'calc(var(--menubar-h) + 1rem)', left: 'var(--desktop-padding)' }}
+          className="absolute grid grid-cols-[repeat(auto-fill,minmax(var(--shortcut-size),1fr))] gap-2 md:gap-4 pointer-events-none"
+        >
            {desktopItems.map(item => (
             <div
               key={item.id}
               className="group flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors pointer-events-auto"
             >
-              <Folder size={48} className="text-blue-400 fill-blue-400/20 shadow-sm" />
-              <span className="text-[11px] text-white text-center font-medium shadow-black drop-shadow-md">
+              <Folder className="text-blue-400 fill-blue-400/20 shadow-sm size-8 md:size-12" />
+              <span className="text-[10px] md:text-[11px] text-white text-center font-medium shadow-black drop-shadow-md">
                 {item.name}
               </span>
             </div>
