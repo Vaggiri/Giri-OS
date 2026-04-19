@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useDragControls } from 'framer-motion';
 import { X, Minus, Maximize2 } from 'lucide-react';
 import useWindowStore from '../../store/useWindowStore';
 import useThemeStore from '../../store/useThemeStore';
@@ -41,6 +41,7 @@ const WindowFrame = ({ id }) => {
   
   const [isInteracting, setIsInteracting] = useState(false);
   const windowRef = useRef(null);
+  const dragControls = useDragControls();
   const dims = useRef({ w: 0, h: 0, x: 0, y: 0 });
 
   if (!window || window.isMinimized) return null;
@@ -72,12 +73,6 @@ const WindowFrame = ({ id }) => {
     applyStyles();
   };
 
-  const handleMove = (event, info) => {
-    dims.current.x += info.delta.x;
-    dims.current.y += info.delta.y;
-    applyStyles();
-  };
-
   const applyStyles = () => {
     if (windowRef.current) {
       windowRef.current.style.width = `${dims.current.w}px`;
@@ -99,6 +94,10 @@ const WindowFrame = ({ id }) => {
     <motion.div
       ref={windowRef}
       onPointerDown={() => focusWindow(id)}
+      drag={!isMax}
+      dragControls={dragControls}
+      dragListener={false}
+      dragMomentum={false}
       initial={{ scale: 0.9, opacity: 0, y: 30 }}
       animate={{ 
         scale: 1, 
@@ -109,6 +108,14 @@ const WindowFrame = ({ id }) => {
         top: isMax ? 'var(--menubar-h)' : window.y,
         left: isMax ? 0 : window.x,
         borderRadius: isMax ? 0 : 12,
+      }}
+      onDragStart={onInteractionStart}
+      onDragEnd={(e, info) => {
+        // Calculate the new X and Y by adding the total drag offset to the original position
+        const newX = window.x + info.offset.x;
+        const newY = window.y + info.offset.y;
+        updateWindowRect(id, { x: newX, y: newY });
+        setIsInteracting(false);
       }}
       exit={{ scale: 0.9, opacity: 0, y: 30 }}
       transition={{ 
@@ -137,11 +144,9 @@ const WindowFrame = ({ id }) => {
         </>
       )}
 
-      {/* Title Bar - Handles Window Movement */}
+      {/* Title Bar - Handles Window Movement via Drag Controls */}
       <motion.div 
-        onPanStart={onInteractionStart}
-        onPan={handleMove}
-        onPanEnd={onInteractionEnd}
+        onPointerDown={(e) => dragControls.start(e)}
         style={{ height: 'var(--window-header-h)' }}
         className="flex items-center justify-between px-4 md:px-6 select-none bg-black/5 border-b border-black/5 cursor-default active:cursor-grabbing"
         onDoubleClick={() => toggleMaximize(id)}
