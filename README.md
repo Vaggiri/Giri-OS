@@ -1,93 +1,106 @@
 # GisunOS - High Performance Web-Based Operating System
 
-![GisunOS Logo Placeholder](https://via.placeholder.com/800x200?text=GisunOS+Evolution)
+![GisunOS Release Banner](https://raw.githubusercontent.com/Vaggiri/Giri-OS/main/client/public/logo.png)
 
-> **Experience the future of the web as a workstation.**
+> **Experience the future of the web as a professional workstation.**
 
-GisunOS is a production-grade, high-performance web-based operating system designed with a macOS-inspired aesthetic and a core focus on speed, modularity, and privacy. Built entirely with vanilla web technologies, it provides a seamless desktop experience directly in the browser.
+GisunOS is a production-grade, high-performance web-based operating system designed with a macOS-inspired aesthetic. Built for the modern web, it provides a seamless desktop experience with a unified full-stack architecture, optimized for both desktop and mobile landscape users.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FVaggiri%2FGiri-OS)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ---
 
 ## 🚀 Key Features
 
-*   **Premium Glassmorphism UI**: A stunning, high-performance desktop interface with dynamic blur and smooth animations.
-*   **Virtual Window Manager**: Fully draggable, resizable, and stackable windowing system.
-*   **Built-in Firewall**: Advanced security layer to monitor and control application network traffic.
-*   **Ad-Free Music System**: A dedicated hub for high-quality audio playback without interruptions.
-*   **Centralized SearchHub**: Quickly find applications, files, and web content from a unified interface.
-*   **Developer Terminal**: A functional command-line interface for system interactions and automation.
+*   **💎 Premium Glassmorphism UI**: A stunning interface with dynamic real-time blur, atmospheric flows, and high-performance spring animations.
+*   **📱 Mobile-First Landscape Guardian**: Automatically scales and optimizes the entire OS for mobile landscape mode with a dedicated orientation enforcement system.
+*   **⚡ Smooth Touch Interaction**: GPU-accelerated window dragging and resizing, specifically tuned for responsive touch-screen performance.
+*   **🌉 GisunBridge Proxy**: Integrated high-speed proxy bridge that allows secure, ad-free browsing and cross-origin YouTube/Media playback.
+*   **🪟 Virtual Window Manager**: A native-feeling windowing system with support for stacking, snapping, minimizing, and desktop persistence.
+*   **🛠️ Developer Suite**: Functional Terminal, File System (VFS), and integrated Activity Monitor with real-time performance metrics.
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Architecture
 
-GisunOS follows a micro-kernel inspired architecture for the web:
+GisunOS is built using a unified Full-Stack Monorepo architecture designed for effortless cloud deployment:
 
-1.  **Core Shell**: Handles window management, desktop state, and event routing.
-2.  **Service Layer**: Independent modules for storage (Supabase), security (Firewall), and media.
-3.  **App Engine**: A standardized interface for loading and running isolated web applications.
-
-For a deeper dive, see our [Architecture Documentation](docs/architecture.md).
+- **Frontend**: React 18, Vite, Framer Motion, and Tailwind CSS.
+- **Backend API**: Node.js / Express serverless functions (standard Vercel API structure).
+- **Core State**: Global state management with Zustand for high-speed persistence.
+- **Vering Logic**: Advanced proxy shielding for loading external web content without security errors.
 
 ---
 
 ## 📦 Installation & Setup
 
 ### Prerequisites
-*   Node.js (v18 or higher)
-*   npm or yarn
+- **Node.js**: v20.x (Recommended)
+- **Supabase Account**: For persistent cloud storage and authentication.
 
 ### Local Development
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Vaggiri/Gisun-OS.git
-   cd Gisun-OS
+   git clone https://github.com/Vaggiri/Giri-OS.git
+   cd Giri-OS
    ```
 
-2. Install dependencies for both client and server:
+2. **Install Dependencies**:
    ```bash
-   # Install root scripts
+   # Install all frontend and backend dependencies from the root
    npm install
-
-   # Setup Frontend
    cd client && npm install
-
-   # Setup Backend
-   cd ../server && npm install
    ```
 
-3. Run the development environment:
+3. **Environment Setup**:
+   Create a `.env` file in the root and add your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_backend_key
+   ```
+
+4. **Run Development**:
    ```bash
-   # From root
-   npm run dev
+   # Start the frontend dev server
+   cd client && npm run dev
    ```
+
+---
+
+## 🚀 Deployment (Vercel)
+
+GisunOS is pre-configured for **Vercel** out of the box:
+
+1. Connect your GitHub repository to Vercel.
+2. The `vercel.json` will automatically handle:
+   - Compiling the React frontend to `client/dist`.
+   - Routing `/api/*` requests to the serverless function in `/api/index.js`.
+   - Setting up SPA fallback for the router.
+3. Ensure you add your Environment Variables in the Vercel Dashboard.
 
 ---
 
 ## 📸 Screenshots
 
-*(Screenshots coming soon! GisunOS is currently in active development.)*
+*(Capture your beautiful screenshots here to wow your contributors!)*
+- **Desktop View**: Highlighting the Dock and Menu Bar.
+- **Mobile Mode**: Showing the Compact UI and Orientation Guardian.
+- **GisunTube**: Demonstrating ad-free video playback through the proxy.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! However, we maintain strict standards to ensure the integrity of the OS. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a Pull Request.
-
----
-
-## 🛡️ Security
-
-Security is foundational to GisunOS. If you discover a vulnerability, please refer to our [SECURITY.md](SECURITY.md) for reporting guidelines.
+We welcome professional contributions! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for our architectural standards and coding guidelines.
 
 ---
 
 ## 👤 Author
 
-GisunOS is designed and built by **Vaggiri**.
-
-*   **Original Creator**: [Vaggiri](https://github.com/Vaggiri)
-*   **Primary Stewardship**: Vaggiri Open Source Lab
+**Vaggiri** - Lead Architect & Designer
+*   GitHub: [@Vaggiri](https://github.com/Vaggiri)
 
 ---
 
@@ -95,10 +108,7 @@ GisunOS is designed and built by **Vaggiri**.
 
 GisunOS is licensed under the **GNU General Public License v3.0**. 
 
-### Why GPL-3.0?
-We use the GPL-3.0 to protect the authorship and the open nature of the project. It ensures that:
-1.  Any software derived from GisunOS must also be open-source and licensed under GPL-3.0.
-2.  Original attribution to **Vaggiri** must be maintained in all versions.
-3.  Patents cannot be used to restrict the freedom of the software.
+Protecting authorship and the open-source spirit is vital to our lab. All derivatives must remain open-source and maintain original attribution to **Vaggiri**.
 
-For full details, see the [LICENSE](LICENSE) file.
+---
+*GisunOS - The absolute desktop for the open web.*
