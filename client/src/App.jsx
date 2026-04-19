@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Desktop from './components/os/Desktop';
 import BootScreen from './components/os/BootScreen';
 import LoginScreen from './components/os/Auth/LoginScreen';
+import OrientationGuardian from './components/os/OrientationGuardian';
 import useSystemStore from './store/useSystemStore';
 import useThemeStore from './store/useThemeStore';
 import useFileSystemStore from './store/useFileSystemStore';
@@ -40,6 +41,8 @@ function App() {
 
   return (
     <div className="h-screen w-screen overflow-hidden select-none bg-black">
+      <OrientationGuardian />
+      
       {/* Global Brightness Overlay */}
       <div 
         className="fixed inset-0 pointer-events-none z-[9999] bg-black transition-opacity duration-300"
