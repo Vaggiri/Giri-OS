@@ -1,0 +1,10 @@
+{
+  "name": "gisun-os-scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for GisunOS",
+  "main": "scripts/upload_to_supabase.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  }
+}

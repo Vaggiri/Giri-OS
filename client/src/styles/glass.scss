@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: 40px;
+  --glass-saturate: 200%;
+  --glass-brightness: 1.1;
+  --glass-contrast: 1.1;
+}
+
+.dark {
+  --glass-bg: rgba(20, 20, 20, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-brightness: 0.9;
+  --glass-contrast: 1.2;
+}
+
+.liquid-glass {
+  background: var(--glass-bg);
+  backdrop-filter: 
+    blur(var(--glass-blur)) 
+    saturate(var(--glass-saturate)) 
+    brightness(var(--glass-brightness))
+    contrast(var(--glass-contrast));
+  border: 0.5px solid var(--glass-border);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass-active {
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--glass-bg);
+}
+
+.glass-magnification {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    transform: scale(1.3);
+  }
+}
