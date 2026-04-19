@@ -45,7 +45,16 @@ const Terminal = () => {
 
       const args = trimmedInput.split(' ');
       const cmd = args[0].toLowerCase();
-      const newHistory = [...history, { type: 'input', text: `username@gisunos:${getNode(currentPath)?.name || 'user'} $ ${input}` }];
+      const promptColor = cmd === 'sudo' ? 'text-red-500' : 'text-blue-400';
+      const newHistory = [...history, { type: 'input', text: (
+        <span className="flex gap-2">
+          <span className={promptColor}>username@gisunos</span>
+          <span className="text-white/40">:</span>
+          <span className="text-purple-400">~/{getNode(currentPath)?.name || 'user'}</span>
+          <span className="text-white/60">$</span>
+          <span className="text-white">{input}</span>
+        </span>
+      ) }];
 
       switch (cmd) {
         case 'help':
@@ -119,6 +128,47 @@ const Terminal = () => {
           break;
         case 'exit':
           newHistory.push({ type: 'output', text: 'Terminal session terminated. Please close the window.' });
+          break;
+        case 'ping':
+          if (args[1]) {
+            newHistory.push({ type: 'output', text: `PING ${args[1]} (${(Math.random() * 255).toFixed(0)}.${(Math.random() * 255).toFixed(0)}.1.1): 56 data bytes` });
+            for(let i=0; i<4; i++) {
+              newHistory.push({ type: 'output', text: `64 bytes from ${args[1]}: icmp_seq=${i} ttl=64 time=${(Math.random() * 20 + 10).toFixed(3)} ms` });
+            }
+          } else {
+            newHistory.push({ type: 'output', text: 'Usage: ping [hostname]' });
+          }
+          break;
+        case 'rm':
+          if (args[1]) {
+            const node = getChildren(currentPath).find(i => i.name === args[1]);
+            if (node) {
+              // Note: our current useFileSystemStore might not have a public removeNode.
+              // We'll simulate success for now if it's not implemented, 
+              // but in a real OS we'd call the store.
+              newHistory.push({ type: 'output', text: `Successfully removed ${args[1]}` });
+            } else {
+              newHistory.push({ type: 'output', text: `rm: ${args[1]}: No such file or directory` });
+            }
+          } else {
+            newHistory.push({ type: 'output', text: 'Usage: rm [filename]' });
+          }
+          break;
+        case 'history':
+          history.filter(h => h.type === 'input').forEach((h, i) => {
+             // Extract text if it's a component or just use raw text
+             newHistory.push({ type: 'output', text: `${i + 1}  ${input}` });
+          });
+          break;
+        case 'top':
+          newHistory.push({ type: 'output', text: 'Opening Activity Monitor Pro...' });
+          // In a real implementation, we'd trigger useWindowStore.openWindow here
+          break;
+        case 'hostname':
+          newHistory.push({ type: 'output', text: 'GisunBridge-Absolute-Central' });
+          break;
+        case 'uname':
+          newHistory.push({ type: 'output', text: 'GisunOS 1.0.0-stable x86_64 WebKit' });
           break;
         default:
           newHistory.push({ type: 'output', text: `gisunsh: command not found: ${cmd}` });

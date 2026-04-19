@@ -25,8 +25,27 @@ const WidgetWrapper = ({ children, id, position }) => {
       initial={false}
       animate={{ x: position.x, y: position.y }}
       onDragEnd={(e, info) => {
-        const newX = position.x + info.offset.x;
-        const newY = position.y + info.offset.y;
+        const SNAP_SIZE = 20;
+        const EDGE_THRESHOLD = 30;
+        
+        let newX = position.x + info.offset.x;
+        let newY = position.y + info.offset.y;
+
+        // Apply Grid Snapping
+        newX = Math.round(newX / SNAP_SIZE) * SNAP_SIZE;
+        newY = Math.round(newY / SNAP_SIZE) * SNAP_SIZE;
+
+        // Apply Edge Magnetism (Sticking to screen edges)
+        const vh = window.innerHeight;
+        const vw = window.innerWidth;
+
+        if (newX < EDGE_THRESHOLD) newX = 0;
+        if (newY < EDGE_THRESHOLD) newY = 0;
+        
+        // Account for widget being near right/bottom (rough estimation)
+        if (vw - newX < 250) newX = vw - 240; // Estimated widget width
+        if (vh - newY < 150) newY = vh - 140;
+
         updateWidgetPosition(id, newX, newY);
       }}
       className="absolute pointer-events-auto cursor-grab active:cursor-grabbing group"

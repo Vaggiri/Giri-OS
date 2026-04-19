@@ -36,9 +36,17 @@ const ActivityMonitorPro = () => {
     const points = data.map((val, i) => {
       const x = (i / (data.length - 1)) * width;
       const y = height - ((val - min) / (max - min)) * height;
-      return `${x},${y}`;
+      return { x, y };
     });
-    return `M ${points.join(" L ")}`;
+    
+    // Create smooth cubic bezier path
+    return points.reduce((acc, point, i, a) => {
+      if (i === 0) return `M ${point.x},${point.y}`;
+      const prev = a[i - 1];
+      const cp1x = prev.x + (point.x - prev.x) / 2;
+      const cp2x = prev.x + (point.x - prev.x) / 2;
+      return `${acc} C ${cp1x},${prev.y} ${cp2x},${point.y} ${point.x},${point.y}`;
+    }, "");
   };
 
   if (error) {
@@ -56,26 +64,32 @@ const ActivityMonitorPro = () => {
       <div className="grid grid-cols-2 gap-4 p-6 bg-gradient-to-b from-white/[0.02] to-transparent">
         {/* CPU Panel */}
         <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/5 relative overflow-hidden group">
-           <div className="flex items-center justify-between mb-4">
+           <div className="flex items-center justify-between mb-4 relative z-10">
               <div className="flex items-center gap-2 text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
-                 <Cpu size={14} /> Processor Core
+                 <Cpu size={14} className="animate-pulse" /> Processor Performance
               </div>
-              <span className="text-xs font-black text-blue-500">{stats?.cpu || '0.0'}%</span>
+              <span className="text-xl font-black text-blue-500 tabular-nums">{stats?.cpu || '0.0'}%</span>
            </div>
-           <div className="h-24 w-full relative">
+           <div className="h-28 w-full relative">
               <svg className="w-full h-full overflow-visible">
                  <defs>
                     <linearGradient id="cpuGradient" x1="0" y1="0" x2="0" y2="1">
-                       <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.5" />
+                       <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
                     </linearGradient>
                  </defs>
                  <path 
-                   d={generatePath(history.cpu, 0, 100, 300, 96)}
+                   d={`${generatePath(history.cpu, 0, 100, 350, 112)} L 350,112 L 0,112 Z`}
+                   fill="url(#cpuGradient)"
+                   className="transition-all duration-700 ease-in-out"
+                 />
+                 <path 
+                   d={generatePath(history.cpu, 0, 100, 350, 112)}
                    fill="transparent"
                    stroke="#3b82f6"
-                   strokeWidth="2"
-                   className="transition-all duration-500 ease-linear"
+                   strokeWidth="3"
+                   strokeLinecap="round"
+                   className="transition-all duration-700 ease-in-out drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
                  />
               </svg>
            </div>
@@ -83,20 +97,32 @@ const ActivityMonitorPro = () => {
 
         {/* Memory Panel */}
         <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/5 relative overflow-hidden group">
-           <div className="flex items-center justify-between mb-4">
+           <div className="flex items-center justify-between mb-4 relative z-10">
               <div className="flex items-center gap-2 text-[10px] text-purple-400 font-black uppercase tracking-[0.2em]">
-                 <HardDrive size={14} /> System RAM
+                 <HardDrive size={14} fill="currentColor" fillOpacity="0.1" /> Neural Memory
               </div>
-              <span className="text-xs font-black text-purple-500">{stats?.memory?.percent || '0.0'}%</span>
+              <span className="text-xl font-black text-purple-500 tabular-nums">{stats?.memory?.percent || '0.0'}%</span>
            </div>
-           <div className="h-24 w-full relative">
+           <div className="h-28 w-full relative">
               <svg className="w-full h-full overflow-visible">
+                 <defs>
+                    <linearGradient id="memGradient" x1="0" y1="0" x2="0" y2="1">
+                       <stop offset="0%" stopColor="#a855f7" stopOpacity="0.3" />
+                       <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
+                    </linearGradient>
+                 </defs>
                  <path 
-                   d={generatePath(history.mem, 0, 100, 300, 96)}
+                   d={`${generatePath(history.mem, 0, 100, 350, 112)} L 350,112 L 0,112 Z`}
+                   fill="url(#memGradient)"
+                   className="transition-all duration-700 ease-in-out"
+                 />
+                 <path 
+                   d={generatePath(history.mem, 0, 100, 350, 112)}
                    fill="transparent"
                    stroke="#a855f7"
-                   strokeWidth="2"
-                   className="transition-all duration-500 ease-linear"
+                   strokeWidth="3"
+                   strokeLinecap="round"
+                   className="transition-all duration-700 ease-in-out drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
                  />
               </svg>
            </div>
