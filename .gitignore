@@ -24,6 +24,16 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Environment Variables (Protect Secrets)
 .env
 .env.*
 !.env.example
+
+# Explicit Subdirectory Ignores
+client/.env
+client/.env.*
+server/.env
+server/.env.*
+api/.env
+api/.env.*
