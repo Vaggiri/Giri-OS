@@ -104,6 +104,18 @@ We welcome professional contributions! Please refer to [CONTRIBUTING.md](CONTRIB
 
 ---
 
+## ⚖️ Legal & Fair Use
+
+GisunOS is an open-source, non-commercial educational project. It integrates third-party services like YouTube and Google Maps via official APIs and proxies.
+
+*   **Fair Use**: Usage of third-party metadata and embeds is intended for transformative educational purposes and does not compete with the original services.
+*   **No Hosting**: GisunOS does not host or distribute copyrighted media files.
+*   **Trademarks**: All trademarks (YouTube, Google, VLC, etc.) belong to their respective owners.
+
+For full legal details, please refer to the [LEGAL_NOTICE.md](LEGAL_NOTICE.md).
+
+---
+
 ## ⚖️ License
 
 GisunOS is licensed under the **GNU General Public License v3.0**. 

@@ -1,6 +1,6 @@
 # Authorship & Attribution Protection Strategy
 
-Maintaining clear and legally defensible proof of ownership is critical for the GisunOS project. This document outlines the technical and legal methods used to enforce attribution to the original creator, **Vaggiri**.
+Maintaining clear and legally defensible proof of ownership is critical for the **GisunOS** project. This document outlines the technical and legal methods used to enforce attribution to the original creator, **Vaggiri**.
 
 ## 1. Legal Enforcement: GPL-3.0 copyleft
 The project is licensed under the GPL-3.0 precisely because it is a "copyleft" license. This means:
@@ -25,18 +25,21 @@ The Git commit history serves as an immutable, timestamped record of the project
 *   **Email Verification**: All core commits are signed using GPG or linked to Vaggiri's verified GitHub account.
 *   **Authors File**: The `AUTHORS` file serves as a high-level summary of ownership that is checked into the main branch.
 
-## 4. UI-Level Attribution
+## 5. UI-Level Attribution
 GisunOS includes non-intrusive but permanent branding in the following locations:
 *   **Boot Sequence**: The "Gisun" logo and "Designed by Vaggiri" text appear during every system start.
 *   **About This OS**: A dedicated system application that displays the version, license, and primary author details.
 *   **System Logs**: The initial system log entry on every boot records the author metadata.
 
-## 5. Mitigation of Attribution Removal
+## 6. Mitigation of Attribution Removal
 If a fork or derivative work is found to have removed author credit:
 1.  **Cease and Desist**: A formal request will be sent to the repository host (e.g., GitHub) citing a GPL-3.0 license violation.
 2.  **DMCA Takedown**: If the credit removal persists, a DMCA request will be filed to remove the infringing content.
 3.  **Public Notice**: The project will maintain a "License Compliance" list of compliant and non-compliant mirrors.
 
+## 7. Third-Party Compliance
+While protecting our own authorship, we also strictly adhere to the copyrights of others. For details on how we handle third-party media and APIs, see the [Legal Notice & Fair Use Policy](LEGAL_NOTICE.md).
+
 ---
-*Strategy Document Version: 1.0.0*
+*Strategy Document Version: 1.1.0*
 *Authorized by: Vaggiri*
